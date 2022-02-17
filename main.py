@@ -56,7 +56,4 @@ def git_push(number):
     repo_ref.edit(commit.sha)
     # push
 
-
-
-
 git_push("2525")
