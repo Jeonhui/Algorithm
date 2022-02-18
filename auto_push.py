@@ -44,7 +44,6 @@ def get_result():
         req = requests.get('https://www.acmicpc.net/status?user_id=' + baekjoon_id + '&problem_id=' + problem_number)
         soup = Soup(req.text, 'html.parser')
         # soup를 이용해 html 가져오기
-
         if soup.find('input', {'name': 'problem_id'}).get('value') != "":
             # problem_id가 ""이 나오면 해당 문제가 없음
             while result[-1] not in break_result:
@@ -67,24 +66,30 @@ def get_result():
     except Exception as e:
         print("Error:", e)
         return
+    try:
+        soup = Soup(requests.get('https://www.acmicpc.net/problem/'+problem_number).text, 'html.parser')
+        title = problem_number +": " + soup.find('span', {'id': 'problem_title'}).text
+    except Exception:
+        title = ""
+
     if result[-1] == "맞았습니다!!":
-        git_push(problem_number)
+        git_push(problem_number, title)
 
 
-def git_push(file_name):
+def git_push(file_name, *title):
     import os
     from github import Github
     from github import InputGitTreeElement
     try:
         g = Github(token)
         # token github에 접속
-
         repo = g.get_repo(repository)
         # repository 설정
         repo_ref = repo.get_git_ref("heads/main")
         repo_sha = repo_ref.object.sha
         base_tree = repo.get_git_tree(repo_sha)
         # push를 위한 설정
+
     except Exception:
         print("잘못된 접근입니다. (token or repository)")
         return
@@ -116,8 +121,11 @@ def git_push(file_name):
             # 파일 내용 element 저장
 
             try:
-                print("commit message: ", end="")
-                commit_message = sys.stdin.readline().rstrip()
+                if len(title) != 0:
+                    commit_message = title[0]
+                else:
+                    print("commit message: ", end="")
+                    commit_message = sys.stdin.readline().rstrip()
                 tree = repo.create_git_tree([element], base_tree)
                 parent = repo.get_git_commit(repo_sha)
                 commit = repo.create_git_commit(commit_message, tree, [parent])
