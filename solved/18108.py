@@ -1,4 +1,3 @@
 import sys
 
-year = int(sys.stdin.readline())
-print(year - 543)
+print(int(sys.stdin.readline())-543)
