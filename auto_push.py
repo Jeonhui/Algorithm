@@ -21,7 +21,7 @@ p 입력 시 - 파일 push
 import sys
 
 baekjoon_id = 'baekjoon_id'
-token = 'ghp_aaaaaaaaaaaaaaaaaaaaaa'
+token = 'ghp_~'
 repository = 'user_name/repository'
 user_github_file_path = '_'
 user_file_path = '_'
