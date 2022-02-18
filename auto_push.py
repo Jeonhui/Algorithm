@@ -20,9 +20,9 @@ p 입력 시 - 파일 push
 
 import sys
 
-baekjoon_id = 'whas02'
-token = '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'
-repository = 'Jeonhui/baekjoon'
+baekjoon_id = 'baekjoon_id'
+token = 'ghp_aaaaaaaaaaaaaaaaaaaaaa'
+repository = 'user_name/repository'
 user_github_file_path = '_'
 user_file_path = '_'
 
