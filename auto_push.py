@@ -1,6 +1,7 @@
 # developed by Jeonhui Lee
 # pip3 install pygithub
 # pip3 install requests
+# pip3 install bs4
 
 '''
 baekjoon_id = 백준_ID
@@ -135,6 +136,7 @@ def git_push(file_name, *title):
             except Exception:
                 print("Push에 실패했습니다.")
                 return
+
     except Exception:
         print("파일이 존재하지 않습니다.")
         return
