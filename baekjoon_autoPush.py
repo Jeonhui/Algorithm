@@ -4,6 +4,10 @@
 # pip3 install bs4
 
 '''
+Baekjoon 문제 맞았을 시에 github에 해당 문제 파일 push
+'''
+
+'''
 baekjoon_id = 백준_ID
 token = Githubtoken
 repository = 'user_name/repository'
