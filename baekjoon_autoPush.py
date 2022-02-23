@@ -35,6 +35,7 @@ user_file_path = '_'
 def get_result():
     import requests
     from bs4 import BeautifulSoup as Soup
+
     print("problem number: ", end="")
     problem_number = sys.stdin.readline().rstrip()
     if problem_number == 'p':
@@ -42,6 +43,7 @@ def get_result():
         file_name = sys.stdin.readline().rstrip()
         git_push(file_name)
         return
+
     result = ["채점 결과"]
     break_result = ["맞았습니다!!", "틀렸습니다", "컴파일 에러"]
 
@@ -71,6 +73,7 @@ def get_result():
     except Exception as e:
         print("Error:", e)
         return
+
     try:
         soup = Soup(requests.get('https://www.acmicpc.net/problem/'+problem_number).text, 'html.parser')
         title = problem_number +": " + soup.find('span', {'id': 'problem_title'}).text
@@ -81,7 +84,7 @@ def get_result():
         git_push(problem_number, title)
 
 
-def git_push(file_name, *title):
+def git_push(file_name, *message):
     import os
     from github import Github
     from github import InputGitTreeElement
@@ -126,8 +129,8 @@ def git_push(file_name, *title):
             # 파일 내용 element 저장
 
             try:
-                if len(title) != 0:
-                    commit_message = title[0]
+                if len(message) != 0:
+                    commit_message = message[0]
                 else:
                     print("commit message: ", end="")
                     commit_message = sys.stdin.readline().rstrip()
