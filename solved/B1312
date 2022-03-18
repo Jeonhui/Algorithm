@@ -1,4 +1,3 @@
-import math
-
 a, b, p = map(int, input().split())
-print(str(math.floor(a/b*p**10))[-1])
+s = str(a / b).split(".")[1]
+print(s[p - 1] if len(s) >= p else 0)
